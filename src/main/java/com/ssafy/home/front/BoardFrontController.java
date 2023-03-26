@@ -21,9 +21,8 @@ import java.io.IOException;
 (로그인처리) http://localhost:8080/mvc/loginProcess.mvc
 */
 //@WebServlet("*.mvc")
-@WebServlet(name = "sevelet", value="/")
+@WebServlet(name = "servlet", value="/")
 public class BoardFrontController extends HttpServlet {
-
     UserController ucon;//login, logout, loginProcess
 
     public BoardFrontController() {
