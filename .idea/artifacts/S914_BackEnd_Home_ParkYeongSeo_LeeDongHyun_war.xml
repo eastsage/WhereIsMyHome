@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun:war exploded" />
+    </root>
+  </artifact>
+</component>
