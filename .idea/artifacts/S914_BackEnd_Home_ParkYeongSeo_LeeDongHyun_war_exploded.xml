@@ -12,6 +12,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun" />
+          <element id="module-output" name="WhereIsMyHome" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
@@ -23,6 +24,7 @@
         <element id="file-copy" path="$PROJECT_DIR$/target/S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun/web/Web" />
+      <element id="javaee-facet-resources" facet="WhereIsMyHome/web/Web" />
     </root>
   </artifact>
 </component>
