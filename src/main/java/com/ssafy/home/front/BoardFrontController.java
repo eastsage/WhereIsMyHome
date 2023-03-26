@@ -43,19 +43,21 @@ public class BoardFrontController extends HttpServlet {
 
         if (reqString.equals("/loginForm")) {//로그인 화면
             ucon.loginForm(request, response);
+        } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
+            ucon.loginProcess(request, response);
         } else if (reqString.equals("/modifyForm")) {
             ucon.modifyForm(request, response);
+        }else if (reqString.equals("/modifyProcess")) {
+            ucon.modifyProcess(request, response);
         } else if (reqString.equals("/accountInfo")) {
             ucon.accountInfo(request, response);
         } else if (reqString.equals("/accountSearch")) {
             ucon.accountSearch(request, response);
+        } else if (reqString.equals("/accountSearchProcess")) {
+            ucon.accountSearchProcess(request, response);
         } else if (reqString.equals("/logout")) {//로그아웃
             ucon.logout(request, response);
-        } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
-            ucon.loginProcess(request, response);
-        } else if (reqString.equals("/modifyProcess")) {
-            ucon.modifyProcess(request, response);
-        } else if (reqString.equals("/home")){
+        }  else if (reqString.equals("/home")){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
         }

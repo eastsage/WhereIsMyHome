@@ -50,8 +50,23 @@ public class UserDAOImpl implements UserDAO {
 			stat.setString(3, oldUser.getId());
 
 			i = stat.executeUpdate();
+			con.close();//pool에 반납
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
 
+	@Override
+	public int search(String id) {
+		int i = 0;
+		try {
+			Connection con = util.getConnection();//pool에서 한개 빌려옴
+			String q = "select count(*) from user where id = ?";
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setString(1, id);
 
+			i = stat.executeUpdate();
 			con.close();//pool에 반납
 		}catch(Exception e) {
 			e.printStackTrace();

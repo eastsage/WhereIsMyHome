@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService{
 	public int modify(User oldUser, User newUser) {
 		return udao.modify(oldUser, newUser);
 	}
+
+	@Override
+	public int search(String id) {
+			return udao.search(id);
+	}
 }

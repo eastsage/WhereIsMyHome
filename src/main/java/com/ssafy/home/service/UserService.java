@@ -7,4 +7,6 @@ public interface UserService {
 	boolean check(User user);
 
 	int modify(User oldUser, User newUser);
+
+    int search(String id);
 }

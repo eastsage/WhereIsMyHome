@@ -70,6 +70,12 @@ public class UserController {
 				}
 	}
 
+	public void accountSearchProcess(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		int resultCount = service.search(id);
+		//TODO: param에 넣어서 forward
+	}
+
 	public void loginProcess(HttpServletRequest request, HttpServletResponse response) {
 		//1.사용자가 입력한 값 받아오기(id, pass)
 		//2.받아온 값으로 User 객체 생성.  User user = new User(id, pass);
