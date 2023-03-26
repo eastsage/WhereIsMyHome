@@ -4,6 +4,7 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,10 +42,9 @@
 	/>
 	<script src="./js/key.js"></script>
 	
-	<title>Sterial &mdash; Free Bootstrap 5 Website Template by Untree.co </title>
+	<title> Where is My Home! </title>
 </head>
 <body>
-
 	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close">
@@ -84,14 +84,12 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</nav>
 
 	
 
 	<div class="hero overlay">
-
 		<div class="img-bg rellax">
 			<img src="images/hero_1.jpg" alt="Image" class="img-fluid">
 		</div>
@@ -105,8 +103,6 @@
 				</div>
 			</div>
 		</div>
-
-		
 	</div>
 
 	<!--동별 아파트별 실거래가 조회 기능 -->
@@ -180,8 +176,6 @@
 		</div>
 	</div>
 
-
-
 	<div class = "section">
 		<div class = "container">
 			<table class="table table-hover text-center" style="display: none">
@@ -196,10 +190,6 @@
 			</table>				
 		</div>
 	</div>
-
-
-
-
 
 	<div class="site-footer">
 		<div class="container">
@@ -269,27 +259,27 @@
 					<p class="mb-0">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ --> Distributed By <a href="https:/themewagon.com" target="_blank">ThemeWagon</a>
 					</p>
 				</div>
-			</div> <!-- /.container -->
-		</div> <!-- /.site-footer -->
+			</div>
+		</div> <!-- /.container -->
+	</div> <!-- /.site-footer -->
 
-		<!-- Preloader -->
-		<div id="overlayer"></div>
+	<!-- Preloader -->
+	<div id="overlayer"></div>
 		<div class="loader">
 			<div class="spinner-border text-primary" role="status">
 				<span class="visually-hidden">Loading...</span>
 			</div>
 		</div>
 
-
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/tiny-slider.js"></script>
-		<script src="js/aos.js"></script>
-		<script src="js/navbar.js"></script>
-		<script src="js/counter.js"></script>
-		<script src="js/rellax.js"></script>
-		<script src="js/flatpickr.js"></script>
-		<script src="js/glightbox.min.js"></script>
-		<script src="js/custom.js"></script>
+		<script src="/js/bootstrap.bundle.min.js"></script>
+		<script src="/js/tiny-slider.js"></script>
+		<script src="/js/aos.js"></script>
+		<script src="/js/navbar.js"></script>
+		<script src="/js/counter.js"></script>
+		<script src="/js/rellax.js"></script>
+		<script src="/js/flatpickr.js"></script>
+		<script src="/js/glightbox.min.js"></script>
+		<script src="/js/custom.js"></script>
 		<script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -571,4 +561,4 @@
             }
         </script>
 	</body>
-	</html>
+</html>
