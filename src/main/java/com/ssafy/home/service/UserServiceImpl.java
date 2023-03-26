@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService{
 	public boolean check(User user) {
 		return udao.check(user);
 	}
+
+	@Override
+	public int modify(User oldUser, User newUser) {
+		return udao.modify(oldUser, newUser);
+	}
 }

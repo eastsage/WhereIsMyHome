@@ -2,6 +2,7 @@ package com.ssafy.home.front;
 
 import com.ssafy.home.controller.UserController;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ import java.io.IOException;
 (로그인처리) http://localhost:8080/mvc/loginProcess.mvc
 */
 //@WebServlet("*.mvc")
-@WebServlet(name = "sevelet", value="/")
+@WebServlet(name = "servlet", value="/")
 public class BoardFrontController extends HttpServlet {
 
     UserController ucon;//login, logout, loginProcess
@@ -38,17 +39,26 @@ public class BoardFrontController extends HttpServlet {
         //client가 보낸 url 구분하는 문자열
         // http://localhost:8080/mvc/list ==> /list.mvc
         String reqString = request.getServletPath();
+//        String reqString = request.getPathInfo();
 
         if (reqString.equals("/loginForm")) {//로그인 화면
             ucon.loginForm(request, response);
-
+        } else if (reqString.equals("/modifyForm")) {
+            ucon.modifyForm(request, response);
+        } else if (reqString.equals("/accountInfo")) {
+            ucon.accountInfo(request, response);
+        } else if (reqString.equals("/accountSearch")) {
+            ucon.accountSearch(request, response);
         } else if (reqString.equals("/logout")) {//로그아웃
             ucon.logout(request, response);
-
         } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
             ucon.loginProcess(request, response);
+        } else if (reqString.equals("/modifyProcess")) {
+            ucon.modifyProcess(request, response);
+        } else if (reqString.equals("/home")){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

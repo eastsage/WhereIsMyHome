@@ -37,6 +37,27 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return flag;
 	}
+
+	@Override
+	public int modify(User oldUser, User newUser) {
+		int i = 0;
+		try {
+			Connection con = util.getConnection();//pool에서 한개 빌려옴
+			String q = "update user set id = ?, pw = ? where id= ? ";
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setString(1, newUser.getId());
+			stat.setString(2, newUser.getPw());
+			stat.setString(3, oldUser.getId());
+
+			i = stat.executeUpdate();
+
+
+			con.close();//pool에 반납
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
 }
 
 
