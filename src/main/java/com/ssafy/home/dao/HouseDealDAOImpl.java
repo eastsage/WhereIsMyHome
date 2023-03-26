@@ -6,6 +6,7 @@ import com.ssafy.home.vo.HouseDeal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class HouseDealDAOImpl implements HouseDealDAO{
@@ -52,4 +53,5 @@ public class HouseDealDAOImpl implements HouseDealDAO{
         }
         return list;
     }
+
 }

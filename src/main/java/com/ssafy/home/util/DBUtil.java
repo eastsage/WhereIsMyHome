@@ -8,8 +8,8 @@ public class DBUtil {
 
 	String driver = "com.mysql.cj.jdbc.Driver";		
 	String url = "jdbc:mysql://localhost:3306/apt?characterEncoding=UTF-8&serverTimezone=UTC";
-	String user = "root";
-	String password = "aosldk12";
+	String user = "scott";
+	String password = "tiger";
 
 	private static DBUtil instance = new DBUtil();
 

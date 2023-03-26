@@ -1,5 +1,6 @@
 package com.ssafy.home.front;
 
+import com.ssafy.home.controller.HomeController;
 import com.ssafy.home.controller.UserController;
 
 import javax.servlet.ServletException;
@@ -24,8 +25,10 @@ import java.io.IOException;
 @WebServlet(name = "servlet", value="/")
 public class BoardFrontController extends HttpServlet {
     UserController ucon;//login, logout, loginProcess
+    HomeController hcon;
 
     public BoardFrontController() {
+        hcon = new HomeController();
         ucon = new UserController();
     }
 
@@ -47,7 +50,10 @@ public class BoardFrontController extends HttpServlet {
         } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
             ucon.loginProcess(request, response);
         }
-
+        else {
+            hcon.getSidos(request, response);
+            log(request.getParameter("sido"));
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

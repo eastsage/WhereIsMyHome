@@ -6,6 +6,8 @@ import com.ssafy.home.vo.DongCode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DongCodeDAOImpl implements DongCodeDAO {
 
@@ -67,5 +69,82 @@ public class DongCodeDAOImpl implements DongCodeDAO {
             e.printStackTrace();
         }
         return dongCode;
+    }
+
+    @Override
+    public ArrayList<String> getSidos(){
+        ArrayList<String> sidos= new ArrayList<>();
+        try {
+            Connection connection = util.getConnection();
+            String query = "select distinct sidoName from dongcode";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()){
+                String sido= resultSet.getString(1);
+                sidos.add(sido);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return sidos;
+    }
+
+
+    @Override
+    public ArrayList<String> getGunguBySido(String sidoName) {
+        ArrayList<String> gungus = new ArrayList<>();
+        try {
+            Connection connection = util.getConnection();
+            if (sidoName.equals("시도선택") || sidoName == null) sidoName = "%";
+
+            String query = "select distinct gunguName from dongcode where sidoName like ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, sidoName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String gunguName = resultSet.getString(1);
+                gungus.add(gunguName);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return gungus;
+    }
+
+    @Override
+    public ArrayList<String> getDongBySidoGungu(String sidoName, String gunguName) {
+        ArrayList<String> dongs = new ArrayList<>();
+        try {
+            Connection connection = util.getConnection();
+            if (sidoName.equals("시도선택") || sidoName == null) sidoName = "%";
+            if (gunguName.equals("군구선택") || sidoName == null) gunguName = "%";
+            String query = "select distinct dongName from dongcode where sidoName like ? and gunguName like ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, sidoName);
+            preparedStatement.setString(2, gunguName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String dongName = resultSet.getString(1);
+                dongs.add(gunguName);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return dongs;
     }
 }
