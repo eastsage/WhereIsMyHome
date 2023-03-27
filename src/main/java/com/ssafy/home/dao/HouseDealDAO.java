@@ -9,5 +9,7 @@ public interface HouseDealDAO {
 
     //아파트 코드, 매매연도, 월을 받아서 매매 정보 리스트 반환
     ArrayList<HouseDeal> select(String aptCode, String dealYear, String dealMonth);
+    ArrayList<String> getDealYear(String dongCode);
+    ArrayList<String> getDealMonth(String dongCode, String dealYear);
 
 }

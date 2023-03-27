@@ -2,12 +2,11 @@ package com.ssafy.home.controller;
 
 import com.ssafy.home.service.HomeService;
 import com.ssafy.home.service.HomeServiceImpl;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 public class HomeController {
     private HomeService homeService;
@@ -17,21 +16,27 @@ public class HomeController {
     }
 
     public void getSidos(HttpServletRequest request, HttpServletResponse response) {
-        String sido = request.getParameter("sido");
-        String gugun = request.getParameter("gugun");
-        String dong = request.getParameter("dong");
-
-        request.setAttribute("sidos", homeService.getSidos());
-        request.setAttribute("guguns", homeService.getGuguns(sido));
-        request.setAttribute("dongs", homeService.getDongs(sido, gugun));
-        request.setAttribute("sido", sido);
-        request.setAttribute("gugun", gugun);
-        request.setAttribute("dong", dong);
-
         try {
-            System.out.println("sido : " + sido);
-            RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
-            dis.forward(request, response);
+            String sido = request.getParameter("sido");
+            String gugun = request.getParameter("gugun");
+            String dong = request.getParameter("dong");
+            String year = request.getParameter("year");
+            String dongCode = homeService.getDongCode(sido, gugun, dong);
+
+
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            JSONObject jObject = new JSONObject();
+
+            jObject.put("sidos", homeService.getSidos());
+            jObject.put("guguns", homeService.getGuguns(sido));
+            jObject.put("dongs", homeService.getDongs(sido, gugun));
+            jObject.put("years", homeService.getDealYear(dongCode));
+            jObject.put("months", homeService.getDealMonth(dongCode, year));
+
+            out.print(jObject);
+            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

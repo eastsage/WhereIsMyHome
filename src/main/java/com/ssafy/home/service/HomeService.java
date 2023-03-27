@@ -11,4 +11,8 @@ public interface HomeService {
     ArrayList<String> getSidos();
     ArrayList<String> getGuguns(String sido);
     ArrayList<String> getDongs(String sido, String gugun);
+
+    ArrayList<String> getDealYear(String dongCode);
+    ArrayList<String> getDealMonth(String dongCode, String dealYear);
+    String getDongCode(String sido, String gugun, String dong);
 }

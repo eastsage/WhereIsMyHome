@@ -54,5 +54,50 @@ public class HouseDealDAOImpl implements HouseDealDAO{
         return list;
     }
 
+    public ArrayList<String> getDealYear(String dongCode){
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            Connection connection = util.getConnection();
+            String query = "select dealYear from housedeal where dongCode = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, dongCode);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()){
+                String dealYear = resultSet.getString(1);
+                list.add(dealYear);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public ArrayList<String> getDealMonth(String dongCode, String dealYear) {
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            Connection connection = util.getConnection();
+            String query = "select dealMonth from housedeal where dongCode = ? and dealYear = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, dongCode);
+            preparedStatement.setString(2, dealYear);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                String dealMonth = resultSet.getString(1);
+                list.add(dealMonth);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

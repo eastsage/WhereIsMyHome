@@ -3,7 +3,6 @@ package com.ssafy.home.front;
 import com.ssafy.home.controller.HomeController;
 import com.ssafy.home.controller.UserController;
 
-import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +50,7 @@ public class BoardFrontController extends HttpServlet {
         } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
             ucon.loginProcess(request, response);
         }
-        else {
+        else if (reqString.equals("/getLocalNames")){
             hcon.getSidos(request, response);
         }
     }

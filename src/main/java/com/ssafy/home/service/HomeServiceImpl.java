@@ -47,4 +47,19 @@ public class HomeServiceImpl implements HomeService {
     public ArrayList<String> getDongs(String sido, String gugun) {
         return dongCodeDAO.getDongs(sido, gugun);
     }
+
+    @Override
+    public ArrayList<String> getDealYear(String dongCode) {
+        return houseDealDAO.getDealYear(dongCode);
+    }
+
+    @Override
+    public ArrayList<String> getDealMonth(String dongCode, String dealYear) {
+        return houseDealDAO.getDealMonth(dongCode, dealYear);
+    }
+
+    @Override
+    public String getDongCode(String sido, String gugun, String dong) {
+        return dongCodeDAO.getDongCode(sido, gugun, dong);
+    }
 }

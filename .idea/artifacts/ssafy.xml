@@ -2,17 +2,18 @@
   <artifact type="exploded-war" name="ssafy">
     <output-path>$PROJECT_DIR$/out/artifacts/ssafy</output-path>
     <root id="root">
+      <element id="artifact" artifact-name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun:war" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="WhereIsMyHome" />
+          <element id="module-output" name="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.0.32" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="WhereIsMyHome/web/Web" />
+      <element id="javaee-facet-resources" facet="S914_BackEnd_Home_ParkYeongSeo_LeeDongHyun/web/Web" />
     </root>
   </artifact>
 </component>
