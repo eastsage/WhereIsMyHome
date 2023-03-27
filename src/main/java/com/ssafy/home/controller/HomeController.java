@@ -21,14 +21,12 @@ public class HomeController {
         String dealYear = request.getParameter("year");
         String dealMonth = request.getParameter("month");
 
-
         request.setAttribute("sidos", homeService.getSidos());
         request.setAttribute("guguns", homeService.getGunguBySido(sido));
         request.setAttribute("dongs", homeService.getDongBySidoGungu(sido, gugun));
-        System.out.println("sido: " +sido + ", gugun: " + gugun);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+
         try {
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

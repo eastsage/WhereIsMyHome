@@ -1,10 +1,5 @@
-<!-- /*
-* Template Name: Sterial
-* Template Author: Untree.co
-* Tempalte URI: https://untree.co/
-* License: https://creativecommons.org/licenses/by/3.0/
-*/ -->
-<%@ page  contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
@@ -31,7 +26,7 @@
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="css/glightbox.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link
+	<lin
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 		rel="stylesheet"
 		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
@@ -122,10 +117,10 @@
 
 
 							<div class="form-group mb-3">
-								<select class="form-select bg-secondary text-light" id="sido" name = "sido">
-									<option value="시도선택">시도선택</option>
-									<c:forEach items="${sidos}" var="sido">
-										<option value = "${sido}"> ${sido}</option>
+								<select class="form-select bg-secondary text-light" id="sido" name = "sido" >
+									<option value="">시도선택</option>
+									<c:forEach var="sido" items="${sidos}" varStatus="loop">
+										<option value = "${loop.index}"> ${sido}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -133,14 +128,14 @@
 							<div class="form-group mb-3">
 								<select class="form-select bg-secondary text-light" id="gugun" name = "gugun">
 									<option value="구군선택">구군선택</option>
-									<c:forEach items="${guguns}" var="gugun">
+									<c:forEach items="${guguns}" var="gugun" varStatus="vstatus">
 										<option value = "${gugun}"> ${gugun}</option>
 									</c:forEach>
-									</select>
+								</select>
 							</div>
 							<div class="form-group mb-3">
 								<select class="form-select bg-secondary text-light" id="dong" name = "dong">
-									<option value="동선택">동선택</option>
+									<option value="">동선택</option>
 									<c:forEach items="${dongs}" var="dong">
 										<option value = "${dong}"> ${dong}</option>
 									</c:forEach>

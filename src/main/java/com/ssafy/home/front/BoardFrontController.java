@@ -3,6 +3,7 @@ package com.ssafy.home.front;
 import com.ssafy.home.controller.HomeController;
 import com.ssafy.home.controller.UserController;
 
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +53,7 @@ public class BoardFrontController extends HttpServlet {
         }
         else {
             hcon.getSidos(request, response);
-            log(request.getParameter("sido"));
+            System.out.println(request.getAttribute("sidos"));
         }
     }
 

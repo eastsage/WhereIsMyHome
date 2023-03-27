@@ -47,9 +47,9 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         String dongCode = "";
         try {
             Connection connection = util.getConnection();
-            if (sidoName.equals("시도선택")) sidoName = "%";
-            if (gugunName.equals("시도선택")) gugunName = "%";
-            if (dongName.equals("시도선택")) dongName= "%";
+            if (sidoName == null) sidoName = "%";
+            if (gugunName == null) gugunName = "%";
+            if (dongName == null) dongName= "%";
 
             String query = "select dongCode from dongcode where sidoName like ?" + "and gugunName like ?" + "and dongName like ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -100,9 +100,9 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         ArrayList<String> gungus = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            if (sidoName.equals("시도선택") || sidoName == null) sidoName = "%";
+            if (sidoName == null) sidoName = "%";
 
-            String query = "select distinct gunguName from dongcode where sidoName like ?";
+            String query = "select distinct gugunName from dongcode where sidoName like ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, sidoName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -127,9 +127,9 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         ArrayList<String> dongs = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            if (sidoName.equals("시도선택") || sidoName == null) sidoName = "%";
-            if (gunguName.equals("군구선택") || sidoName == null) gunguName = "%";
-            String query = "select distinct dongName from dongcode where sidoName like ? and gunguName like ?";
+            if (sidoName == null) sidoName = "%";
+            else if (sidoName == null) gunguName = "%";
+            String query = "select distinct dongName from dongcode where sidoName like ? and gugunName like ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, sidoName);
             preparedStatement.setString(2, gunguName);
