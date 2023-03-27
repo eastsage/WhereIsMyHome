@@ -22,7 +22,8 @@ public class DongCodeDAOImpl implements DongCodeDAO {
        DongCode dongCodeInfo = null;
         try {
            Connection connection = util.getConnection();
-           String query = "select * from dongcode where dongCode = ?";
+           if (dongCode == null) dongCode = "%";
+           String query = "select * from dongcode where dongCode like ?";
            PreparedStatement preparedStatement = connection.prepareStatement(query);
            preparedStatement.setString(1, dongCode);
            ResultSet resultSet = preparedStatement.executeQuery();
@@ -99,7 +100,8 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         ArrayList<String> gungus = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            String query = "select distinct gugunName from dongcode where sidoName = ?";
+            if (sido == null) sido = "%";
+            String query = "select distinct gugunName from dongcode where sidoName like ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, sido);
             ResultSet resultSet = statement.executeQuery();
@@ -124,7 +126,10 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         ArrayList<String> dongs = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            String query = "select distinct dongName from dongcode where sidoName = ? and gugunName = ?";
+            if (sido == null) sido = "%";
+            else if (gugun == null) gugun= "%";
+
+            String query = "select distinct dongName from dongcode where sidoName like ? and gugunName like ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, sido);
             statement.setString(2, gugun);
