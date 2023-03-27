@@ -3830,7 +3830,7 @@ progress {
       display: inline-block;
       padding-right: 0.5rem;
       color: #6c757d;
-      content: "/"; }
+      content: ; }
   .breadcrumb-item.active {
     color: #6c757d; }
 

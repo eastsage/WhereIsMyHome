@@ -10,7 +10,7 @@
             <a href="loginForm">Sign In</a>
         </li>
         <li class="cta-button">
-            <a href="signUp">Sign Up</a>
+            <a href="signupForm">Sign Up</a>
         </li>
     </ul>
 

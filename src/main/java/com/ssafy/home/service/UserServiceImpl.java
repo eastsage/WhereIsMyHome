@@ -25,4 +25,19 @@ public class UserServiceImpl implements UserService{
 	public int search(String id) {
 			return udao.search(id);
 	}
+
+	@Override
+	public int delete(String id) {
+		return udao.delete(id);
+	}
+
+	@Override
+	public String findPass(String id) {
+		return udao.findPass(id);
+	}
+
+	@Override
+	public int signupProcess(User user) {
+		return udao.signupProcess(user);
+	}
 }

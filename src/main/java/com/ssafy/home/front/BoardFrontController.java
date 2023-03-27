@@ -39,26 +39,33 @@ public class BoardFrontController extends HttpServlet {
         //client가 보낸 url 구분하는 문자열
         // http://localhost:8080/mvc/list ==> /list.mvc
         String reqString = request.getServletPath();
-//        String reqString = request.getPathInfo();
 
         if (reqString.equals("/loginForm")) {//로그인 화면
             ucon.loginForm(request, response);
         } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
             ucon.loginProcess(request, response);
+        } else if (reqString.equals("/signupForm")) {
+            ucon.signupForm(request, response);
+        } else if (reqString.equals("/signupProcess")) {
+            ucon.signupProcess(request, response);
         } else if (reqString.equals("/modifyForm")) {
             ucon.modifyForm(request, response);
-        }else if (reqString.equals("/modifyProcess")) {
+        } else if (reqString.equals("/modifyProcess")) {
             ucon.modifyProcess(request, response);
         } else if (reqString.equals("/accountInfo")) {
             ucon.accountInfo(request, response);
         } else if (reqString.equals("/accountSearch")) {
             ucon.accountSearch(request, response);
+        } else if (reqString.equals("/findPass")) {
+            ucon.findPass(request, response);
         } else if (reqString.equals("/accountSearchProcess")) {
             ucon.accountSearchProcess(request, response);
+        } else if (reqString.equals("/accountDelete")) {
+            ucon.accountDelete(request, response);
         } else if (reqString.equals("/logout")) {//로그아웃
             ucon.logout(request, response);
-        }  else if (reqString.equals("/home")){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        } else if (reqString.equals("/home")) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
             dispatcher.forward(request, response);
         }
     }

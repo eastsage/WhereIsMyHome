@@ -1,11 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: dong
+  User: idonghyeon
   Date: 2023/03/27
-  Time: 1:21 AM
+  Time: 2:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
     </div>
 
     <%--navbar start--%>
-    <%@include file="nav.jsp" %>
+    <%@include file="nav.jsp"%>
     <%--navbar end--%>
 
     <div class="hero overlay">
@@ -70,40 +70,13 @@
         <div class="container" id="inform">
             <div class="row">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="0">
-                    <h2 class="heading mb-5">Account Info</h2>
+                    <h2 class="heading mb-5">Find your Password</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <h2>반갑습니다. ${user.id} 님</h2>
-                        </div>
-                        <div></div>
-                        <div class="col-6 mb-3">
-                            <a href="modifyForm" type="button" class="btn btn-primary">
-                                회원정보 수정하기
-                            </a>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <a href="accountSearch" type="button" class="btn btn-primary">
-                                회원 검색
-                            </a>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <a href="findPass" type="button" class="btn btn-primary">
-                                비밀번호 찾기
-                            </a>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <form action="accountDelete" method="post">
-                                <input type="text" value="${user.id}" name="deleteId" hidden>
-                                <button type="summit" class="btn btn-danger">
-                                    회원 삭제
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    <h2>${user.id} 님의 비밀번호는</h2>
+                    <h2>${requestScope.pass} 입니다.</h2>
                 </div>
             </div>
         </div>
