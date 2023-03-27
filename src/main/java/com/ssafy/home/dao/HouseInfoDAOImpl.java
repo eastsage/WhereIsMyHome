@@ -61,30 +61,28 @@ public class HouseInfoDAOImpl implements HouseInfoDAO{
 
        return info;
     }
-
     @Override
-    public ArrayList<String> searchAptCodeByNameAndDongCode(String searchedName, String dongCode) {
-        ArrayList<String> list = new ArrayList<>();
+    public ArrayList<String> getAptCodes(String dongCode){
+        ArrayList<String> aptCodes = new ArrayList<>();
         try {
-            Connection connection = util.getConnection();
-            searchedName = "%" + searchedName + "%";
-            String query = "select aptCode from houseinfo where apartmentName like ? and donCode = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, searchedName);
-            preparedStatement.setString(2, dongCode);
-            ResultSet resultSet = preparedStatement.executeQuery();
+           Connection connection = util.getConnection();
+           String query = "select aptCode from houseinfo where dongCode = ?";
+           PreparedStatement preparedStatement = connection.prepareStatement(query);
+           preparedStatement.setString(1, dongCode);
+           ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+           if (resultSet.next()){
                 String aptCode = resultSet.getString(1);
-                list.add(aptCode);
-            }
+                aptCodes.add(aptCode);
+           }
 
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
-        } catch (Exception e){
+           resultSet.close();
+           preparedStatement.close();
+           connection.close();
+       } catch (Exception e){
             e.printStackTrace();
-        }
-        return list;
+       }
+
+        return aptCodes;
     }
 }

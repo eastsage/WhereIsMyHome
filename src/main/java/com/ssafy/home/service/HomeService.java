@@ -7,12 +7,12 @@ import com.ssafy.home.vo.HouseInfo;
 import java.util.ArrayList;
 
 public interface HomeService {
-    ArrayList<HouseDeal> getHouseDealInfo(String searchedName, String sidoName, String gugunName, String dongName, String dealYear, String dealMonth);
     ArrayList<String> getSidos();
     ArrayList<String> getGuguns(String sido);
     ArrayList<String> getDongs(String sido, String gugun);
 
-    ArrayList<String> getDealYear(String dongCode);
-    ArrayList<String> getDealMonth(String dongCode, String dealYear);
+    ArrayList<String> getDealYear(ArrayList<String> aptCode);
+    ArrayList<String> getDealMonth(ArrayList<String> aptCode, String dealYear);
     String getDongCode(String sido, String gugun, String dong);
+    ArrayList<String> getAptCodes(String dongCode);
 }

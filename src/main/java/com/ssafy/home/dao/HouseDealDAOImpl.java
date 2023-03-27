@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class HouseDealDAOImpl implements HouseDealDAO{
 
@@ -54,21 +57,25 @@ public class HouseDealDAOImpl implements HouseDealDAO{
         return list;
     }
 
-    public ArrayList<String> getDealYear(String dongCode){
+    public ArrayList<String> getDealYear(ArrayList<String> aptCodes){
         ArrayList<String> list = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            String query = "select dealYear from housedeal where dongCode = ?";
+            String query = "select dealYear from housedeal where  aptCode= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, dongCode);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            for (String aptCode : aptCodes) {
 
-            while (resultSet.next()){
-                String dealYear = resultSet.getString(1);
-                list.add(dealYear);
+                preparedStatement.setString(1, aptCode);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String dealYear = resultSet.getString(1);
+                    list.add(dealYear);
+                }
+                resultSet.close();
             }
-
-            resultSet.close();
+            list = new ArrayList<>(
+                list.stream().distinct().collect(Collectors.toList())
+            );
             preparedStatement.close();
             connection.close();
         } catch (Exception e){
@@ -78,21 +85,27 @@ public class HouseDealDAOImpl implements HouseDealDAO{
     }
 
     @Override
-    public ArrayList<String> getDealMonth(String dongCode, String dealYear) {
+    public ArrayList<String> getDealMonth(ArrayList<String> aptCodes, String dealYear) {
         ArrayList<String> list = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            String query = "select dealMonth from housedeal where dongCode = ? and dealYear = ?";
+            String query = "select dealMonth from housedeal where aptCode= ? and dealYear = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, dongCode);
             preparedStatement.setString(2, dealYear);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
-                String dealMonth = resultSet.getString(1);
-                list.add(dealMonth);
+            for (String aptCode : aptCodes){
+                preparedStatement.setString(1, aptCode);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String dealMonth = resultSet.getString(1);
+                    list.add(dealMonth);
+                }
+                resultSet.close();
             }
-            resultSet.close();
+            list = new ArrayList<>(
+                list.stream().distinct().collect(Collectors.toList())
+            );
             preparedStatement.close();
             connection.close();
         } catch (Exception e){

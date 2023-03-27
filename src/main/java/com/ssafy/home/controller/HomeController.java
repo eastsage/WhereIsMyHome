@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HomeController {
     private HomeService homeService;
@@ -22,7 +25,7 @@ public class HomeController {
             String dong = request.getParameter("dong");
             String year = request.getParameter("year");
             String dongCode = homeService.getDongCode(sido, gugun, dong);
-
+            ArrayList<String> aptCodes = homeService.getAptCodes(dongCode);
 
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
@@ -32,8 +35,8 @@ public class HomeController {
             jObject.put("sidos", homeService.getSidos());
             jObject.put("guguns", homeService.getGuguns(sido));
             jObject.put("dongs", homeService.getDongs(sido, gugun));
-            jObject.put("years", homeService.getDealYear(dongCode));
-            jObject.put("months", homeService.getDealMonth(dongCode, year));
+            jObject.put("years", homeService.getDealYear(aptCodes));
+            jObject.put("months", homeService.getDealMonth(aptCodes, year));
 
             out.print(jObject);
             out.close();
