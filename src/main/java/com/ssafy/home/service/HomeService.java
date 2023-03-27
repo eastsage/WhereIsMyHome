@@ -9,6 +9,6 @@ import java.util.ArrayList;
 public interface HomeService {
     ArrayList<HouseDeal> getHouseDealInfo(String searchedName, String sidoName, String gugunName, String dongName, String dealYear, String dealMonth);
     ArrayList<String> getSidos();
-    ArrayList<String> getGunguBySido(String sidoName);
-    ArrayList<String> getDongBySidoGungu(String sidoName, String gunguName);
+    ArrayList<String> getGuguns(String sido);
+    ArrayList<String> getDongs(String sido, String gugun);
 }

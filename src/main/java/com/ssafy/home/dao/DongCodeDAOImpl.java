@@ -94,18 +94,15 @@ public class DongCodeDAOImpl implements DongCodeDAO {
         return sidos;
     }
 
-
     @Override
-    public ArrayList<String> getGunguBySido(String sidoName) {
+    public ArrayList<String> getGuguns(String sido) {
         ArrayList<String> gungus = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            if (sidoName == null) sidoName = "%";
-
-            String query = "select distinct gugunName from dongcode where sidoName like ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, sidoName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            String query = "select distinct gugunName from dongcode where sidoName = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, sido);
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()){
                 String gunguName = resultSet.getString(1);
@@ -113,7 +110,7 @@ public class DongCodeDAOImpl implements DongCodeDAO {
             }
 
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
             connection.close();
         } catch (Exception e){
             e.printStackTrace();
@@ -123,24 +120,22 @@ public class DongCodeDAOImpl implements DongCodeDAO {
     }
 
     @Override
-    public ArrayList<String> getDongBySidoGungu(String sidoName, String gunguName) {
+    public ArrayList<String> getDongs(String sido, String gugun) {
         ArrayList<String> dongs = new ArrayList<>();
         try {
             Connection connection = util.getConnection();
-            if (sidoName == null) sidoName = "%";
-            else if (sidoName == null) gunguName = "%";
-            String query = "select distinct dongName from dongcode where sidoName like ? and gugunName like ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, sidoName);
-            preparedStatement.setString(2, gunguName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            String query = "select distinct dongName from dongcode where sidoName = ? and gugunName = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, sido);
+            statement.setString(2, gugun);
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()){
                 String dongName = resultSet.getString(1);
-                dongs.add(gunguName);
+                dongs.add(dongName);
             }
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
             connection.close();
         } catch (Exception e){
             e.printStackTrace();

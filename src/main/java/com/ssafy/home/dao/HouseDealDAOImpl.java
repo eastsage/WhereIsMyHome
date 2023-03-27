@@ -25,7 +25,7 @@ public class HouseDealDAOImpl implements HouseDealDAO{
             if (dealYear.equals("매매년도선택")) dealYear= "%";
             else if (dealMonth.equals("매매월선택")) dealMonth= "%";
 
-            String query = "select 'no', dealAmount, dealDay, area, floor, cancelDealType from houseinfo where apartmentName like ? and dealYear like ? and dealMonth like ?";
+            String query = "select 'no', dealAmount, dealDay, area, floor, cancelDealType from housedeal where apartmentName like ? and dealYear like ? and dealMonth like ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, aptCode);
             preparedStatement.setString(2, dealYear);
@@ -53,5 +53,6 @@ public class HouseDealDAOImpl implements HouseDealDAO{
         }
         return list;
     }
+
 
 }

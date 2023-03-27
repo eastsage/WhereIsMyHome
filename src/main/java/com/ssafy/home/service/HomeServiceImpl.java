@@ -39,12 +39,12 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public ArrayList<String> getGunguBySido(String sidoName) {
-        return dongCodeDAO.getGunguBySido(sidoName);
+    public ArrayList<String> getGuguns(String sido) {
+        return dongCodeDAO.getGuguns(sido);
     }
 
     @Override
-    public ArrayList<String> getDongBySidoGungu(String sidoName, String gunguName) {
-        return dongCodeDAO.getDongBySidoGungu(sidoName, gunguName);
+    public ArrayList<String> getDongs(String sido, String gugun) {
+        return dongCodeDAO.getDongs(sido, gugun);
     }
 }

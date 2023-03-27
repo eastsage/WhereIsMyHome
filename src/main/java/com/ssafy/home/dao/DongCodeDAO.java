@@ -13,6 +13,6 @@ public interface DongCodeDAO {
     //시도로 -> 군구 받기
     //군구로 -> 동 받기
     ArrayList<String> getSidos();
-    ArrayList<String> getGunguBySido(String sidoName);
-    ArrayList<String> getDongBySidoGungu(String sidoName, String gunguName);
+    ArrayList<String> getGuguns(String sido);
+    ArrayList<String> getDongs(String sido, String gugun);
 }

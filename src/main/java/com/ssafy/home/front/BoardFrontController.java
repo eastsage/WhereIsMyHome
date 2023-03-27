@@ -53,7 +53,6 @@ public class BoardFrontController extends HttpServlet {
         }
         else {
             hcon.getSidos(request, response);
-            System.out.println(request.getAttribute("sidos"));
         }
     }
 
