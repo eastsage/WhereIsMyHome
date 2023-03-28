@@ -113,7 +113,7 @@
         <div class="row">
           <div class="input-group col-md-6">
             <span class="input-group-text mb-3">아파트 명</span>
-            <input type="text" class="form-control mb-3" id = "aptName" placeholder="아파트 명"/>
+            <input type="text" class="form-control mb-3" id = "aptName" name = "aptName" placeholder="아파트 명"/>
             <div class="form-group mb-3">
               <select class="form-select bg-secondary text-light" id="sido" name = "sido"> </select>
             </div>
@@ -147,7 +147,7 @@
         <label class="btn btn-outline-primary" for="btnradio4">월세</label>
       </div>
       <div class="form-group col-md-2">
-        <button type="button" id="list-btn" class="btn btn-outline-primary" onclick = "getDealInfo()">
+        <button type="button" id="list-btn" class="btn btn-outline-primary">
           아파트매매정보
         </button>
       </div>
@@ -162,7 +162,7 @@
 
 <div class = "section">
   <div class = "container">
-    <table class="table table-hover text-center" style="display: none">
+    <table class="table table-hover text-center" style="display: none" id="aptTable">
       <tr>
         <th>아파트이름</th>
         <th>층</th>
@@ -304,29 +304,38 @@
           let yearOpts;
           let monthOpts;
 
+          sidoOpts += "<option value = ''> 시도선택 </option>";
           for (let i = 0; i < sidos.length; i++) {
             if (!sidos[i]) continue;
             if (sido == sidos[i]) sidoOpts += "<option value='" + sidos[i] + "'selected >" + sidos[i] + "</option>";
             else sidoOpts += "<option value='" + sidos[i] + "'>" + sidos[i] + "</option>";
           }
+
+          gugunOpts += "<option value = ''> 구군선택 </option>";
           for (let i = 0; i < guguns.length; i++) {
             if (!guguns[i]) continue;
             if (gugun == guguns[i]) gugunOpts += "<option value='" + guguns[i] + "'selected >" + guguns[i] + "</option>";
             else gugunOpts += "<option value='" + guguns[i] + "'>" + guguns[i] + "</option>";
           }
+
+          dongOpts += "<option value = ''> 동선택 </option>";
           for (let i = 0; i < dongs.length; i++) {
             if (!dongs[i]) continue;
             if (dong == dongs[i]) dongOpts += "<option value='" + dongs[i] + "'selected>" + dongs[i] + "</option>";
             else dongOpts += "<option value='" + dongs[i] + "'>" + dongs[i] + "</option>";
           }
+
+          yearOpts += "<option value = ''> 매매년도 </option>";
           for (let i = 0; i < years.length; i++) {
             if (!years[i]) continue;
             if (year == years[i]) yearOpts += "<option value='" + years[i] + "'selected>" + years[i] + "</option>";
             else yearOpts += "<option value='" + years[i] + "'>" + years[i] + "</option>";
           }
+
+          monthOpts += "<option value = ''> 매매월 </option>";
           for (let i = 0; i < months.length; i++) {
             if (!months[i]) continue;
-            if (month == months[i]) dongOpts += "<option value='" + months[i] + "'selected>" + months[i] + "</option>";
+            if (month == months[i]) monthOpts += "<option value='" + months[i] + "'selected>" + months[i] + "</option>";
             else monthOpts += "<option value='" + months[i] + "'>" + months[i] + "</option>";
           }
           document.querySelector('#sido').innerHTML = sidoOpts;
@@ -342,104 +351,49 @@
 </script>
 
 <script>
-
   ///////////////////////// 아파트 매매 정보 /////////////////////////
   document.querySelector("#list-btn").addEventListener("click", function () {
-    let url =
-            "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-    let gugunSel = document.querySelector("#gugun");
-    let regCode = gugunSel[gugunSel.selectedIndex].value.substr(0, 5);
-    let yearSel = document.querySelector("#year");
-    let year = yearSel[yearSel.selectedIndex].value;
-    let monthSel = document.querySelector("#month");
-    let month = monthSel[monthSel.selectedIndex].value;
-    let dealYM = year + month;
-    let queryParams =
-            encodeURIComponent("serviceKey") + "=" + serviceKey; /*Service Key*/
-    queryParams +=
-            "&" +
-            encodeURIComponent("LAWD_CD") +
-            "=" +
-            encodeURIComponent(regCode); /*아파트소재 구군*/
-    queryParams +=
-            "&" +
-            encodeURIComponent("DEAL_YMD") +
-            "=" +
-            encodeURIComponent(dealYM); /*조회년월*/
-    queryParams +=
-            "&" +
-            encodeURIComponent("pageNo") +
-            "=" +
-            encodeURIComponent("1"); /*페이지번호*/
-    queryParams +=
-            "&" +
-            encodeURIComponent("numOfRows") +
-            "=" +
-            encodeURIComponent("30"); /*페이지당건수*/
+    let xhr = new XMLHttpRequest();
+    let aptName = document.getElementById("aptName").value;
+    let sido = document.getElementById("sido").value;
+    let gugun = document.getElementById("gugun").value;
+    let dong = document.getElementById("dong").value;
+    let year = document.getElementById("year").value;
+    let month = document.getElementById("month").value;
+    let aptList = document.getElementById("aptlist");
+    let table = document.getElementById("aptTable");
+    let tbody = "";
+    let url = "/getAptList?aptName="+aptName + "&sido="+sido+"&gugun="+gugun+"&dong="+dong+"&year="+year+"&month="+month;
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        if (!xhr.responseText) return;
+        let res = JSON.parse(xhr.responseText);
+        for (let i = 0; i < res.length; i++){
+            let info= res[i];
 
-    fetch(`${url}?${queryParams}`)
-    .then((response) => response.text())
-    .then((data) => makeList(data));
-  });
-
-  function makeList(data) {
-    document.querySelector("table").setAttribute("style", "display: ;");
-    let tbody = document.querySelector("#aptlist");
-    let parser = new DOMParser();
-    const xml = parser.parseFromString(data, "application/xml");
-    initTable();
-    let apts = xml.querySelectorAll("item");
-    apts.forEach((apt) => {
-      if (apt.querySelector("법정동").textContent.includes(document.getElementById("dong").options[document.getElementById("dong").selectedIndex].text)){
-        if (!apt.querySelector("아파트").textContent.includes(document.getElementById("aptName").value)) return;
-        let tr = document.createElement("tr");
-
-        let nameTd = document.createElement("td");
-        nameTd.appendChild(
-                document.createTextNode(apt.querySelector("아파트").textContent)
-        );
-        tr.appendChild(nameTd);
-
-        let floorTd = document.createElement("td");
-        floorTd.appendChild(
-                document.createTextNode(apt.querySelector("층").textContent)
-        );
-        tr.appendChild(floorTd);
-
-        let areaTd = document.createElement("td");
-        areaTd.appendChild(
-                document.createTextNode(apt.querySelector("전용면적").textContent)
-        );
-        tr.appendChild(areaTd);
-
-        let dongTd = document.createElement("td");
-        dongTd.appendChild(
-                document.createTextNode(apt.querySelector("법정동").textContent)
-        );
-        tr.appendChild(dongTd);
-
-        let priceTd = document.createElement("td");
-        priceTd.appendChild(
-                document.createTextNode(apt.querySelector("거래금액").textContent + "만원")
-        );
-        priceTd.classList.add("text-end");
-        tr.appendChild(priceTd);
-
-        let address =
-                apt.querySelector("중개사소재지").textContent +
-                " " +
-                apt.querySelector("법정동").textContent +
-                " " +
-                apt.querySelector("지번").textContent;
-        tr.addEventListener("click", () =>
-                viewMap(apt.querySelector("아파트").textContent, address)
-        );
-
-        tbody.appendChild(tr);
+            let aptName = info.aptName;
+            let floor = info.floor;
+            let area = info.area;
+            let dong = info.dong;
+            let dealAmount = info.dealAmount;
+            tbody += '<tr>';
+            tbody += '<td>' + aptName + '</td>';
+            tbody += '<td>' + floor + '</td>';
+            tbody += '<td>' + area + '</td>';
+            tbody += '<td>' + dong + '</td>';
+            tbody += '<td>' + dealAmount + '</td>';
+            tbody += '</tr>';
+        }
+        aptList.innerHTML = tbody;
+        table.setAttribute("style", "display: ;");
       }
-    });
-  }
-
+    }
+    xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    xhr.send();
+  });
+</script>
+<script>
   // 카카오지도
   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
           mapOption = {

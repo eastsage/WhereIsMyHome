@@ -53,6 +53,9 @@ public class BoardFrontController extends HttpServlet {
         else if (reqString.equals("/getLocalNames")){
             hcon.getSidos(request, response);
         }
+        else if (reqString.equals("/getAptList")){
+            hcon.getList(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

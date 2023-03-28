@@ -3,6 +3,7 @@ package com.ssafy.home.service;
 import com.ssafy.home.dao.*;
 import com.ssafy.home.vo.HouseDeal;
 
+import com.ssafy.home.vo.HouseInfo;
 import java.util.ArrayList;
 
 public class HomeServiceImpl implements HomeService {
@@ -49,5 +50,14 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public ArrayList<String> getAptCodes(String dongCode){
         return houseInfoDAO.getAptCodes(dongCode);
+    }
+    @Override
+    public ArrayList<HouseDeal> select(ArrayList<String> aptCode, String dealYear, String dealMonth) {
+        return houseDealDAO.select(aptCode, dealYear, dealMonth);
+    }
+
+    @Override
+    public HouseInfo searchByAptCode(String aptCode) {
+        return houseInfoDAO.searchByAptCode(aptCode);
     }
 }
