@@ -3,6 +3,7 @@ package com.ssafy.home.front;
 import com.ssafy.home.controller.HomeController;
 import com.ssafy.home.controller.UserController;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,39 +24,52 @@ import java.io.IOException;
 */
 //@WebServlet("*.mvc")
 @WebServlet(name = "servlet", value="/")
-public class BoardFrontController extends HttpServlet {
+public class FrontController extends HttpServlet {
     UserController ucon;//login, logout, loginProcess
     HomeController hcon;
 
-    public BoardFrontController() {
+    public FrontController() {
         hcon = new HomeController();
         ucon = new UserController();
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // 1.client에서 server로 보내는 한글처리
         request.setCharacterEncoding("utf-8");
-
-        //client가 보낸 url 구분하는 문자열
-        // http://localhost:8080/mvc/list ==> /list.mvc
         String reqString = request.getServletPath();
-
         if (reqString.equals("/loginForm")) {//로그인 화면
             ucon.loginForm(request, response);
-
-        } else if (reqString.equals("/logout")) {//로그아웃
-            ucon.logout(request, response);
-
         } else if (reqString.equals("/loginProcess")) {//로그인 처리(db체크, 세션에 로그인 정보 저장)
             ucon.loginProcess(request, response);
-        }
-        else if (reqString.equals("/getLocalNames")){
+        } else if (reqString.equals("/signupForm")) {
+            ucon.signupForm(request, response);
+        } else if (reqString.equals("/signupProcess")) {
+            ucon.signupProcess(request, response);
+        } else if (reqString.equals("/modifyForm")) {
+            ucon.modifyForm(request, response);
+        } else if (reqString.equals("/modifyProcess")) {
+            ucon.modifyProcess(request, response);
+        } else if (reqString.equals("/accountInfo")) {
+            ucon.accountInfo(request, response);
+        } else if (reqString.equals("/accountSearch")) {
+            ucon.accountSearch(request, response);
+        } else if (reqString.equals("/findPass")) {
+            ucon.findPass(request, response);
+        } else if (reqString.equals("/accountSearchProcess")) {
+            ucon.accountSearchProcess(request, response);
+        } else if (reqString.equals("/accountDelete")) {
+            ucon.accountDelete(request, response);
+        } else if (reqString.equals("/logout")) {//로그아웃
+            ucon.logout(request, response);
+        } else if (reqString.equals("/getLocalNames")){
             hcon.getSidos(request, response);
-        }
-        else if (reqString.equals("/getAptList")){
+        } else if (reqString.equals("/getAptList")){
             hcon.getList(request, response);
+        } else if (reqString.equals("/")) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
